@@ -1,0 +1,3 @@
+python-libtorrent>=0.16.13
+requests>=2.5.1
+jenkinsapi>=0.2.25
