@@ -1,7 +1,8 @@
 import time
-import requests
 import ConfigParser
 import logging
+
+import requests
 import libtorrent as lt
 from jenkinsapi.jenkins import Jenkins
 
@@ -63,7 +64,7 @@ class IsoSearchCore():
                         LOG.debug('Skipped: {0}'.format(last_job_build))
 
                     while (last_job_build.get_upstream_job_name() ==
-                               self.job_name):
+                           self.job_name):
 
                         if last_job_build.get_upstream_job_name() is None:
                             last_number = last_job_build.get_number() - 1
