@@ -43,7 +43,6 @@ class IsoSearchCore():
                 last_job_build = self.jenkins[job].get_last_build()
                 print '******************'
                 print 'Checking downstream job {0}'.format(job)
-                print '******************'
 
                 while last_job_build.get_upstream_build_number() \
                         != last_good_build.get_number() or \
@@ -51,6 +50,7 @@ class IsoSearchCore():
                         self.job_name:
 
                     if last_job_build.get_upstream_job_name() != self.job_name:
+                        print 'Skipped: {0}'.format(last_job_build)
                         last_number = last_job_build.get_number() - 1
                         last_job_build = self.jenkins[job].get_build(
                             last_number)
@@ -89,7 +89,7 @@ class IsoSearchCore():
                     next_build_number = last_good_build_number - 1
                     last_good_build = self.job.get_build(next_build_number)
                     while last_good_build.get_status() != 'SUCCESS':
-                        next_build_number = last_good_build_number - 1
+                        next_build_number -= 1
                         last_good_build = self.job.get_build(next_build_number)
                     print 'Now checking iso#{0}'.format(next_build_number)
                     mark_stable = False
